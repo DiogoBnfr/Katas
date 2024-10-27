@@ -1,2 +1,10 @@
+# Windows
 *.exe
+
+# Cargo
 target/
+
+# Rider
+.idea/
+bin/
+obj/
