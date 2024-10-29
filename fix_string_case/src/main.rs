@@ -1,25 +1,15 @@
-fn solve(s: &str) -> String {
-    let mut lcase = 0;
-    let mut ucase = 0;
-
-    for c in s.chars() {
-        if c.is_ascii_lowercase() {
-            lcase += 1;
-        }
-        if c.is_ascii_uppercase() {
-            ucase += 1;
-        }
+fn fix_string_case(s: &str) -> String {
+    if s.chars().filter(|c| c.is_uppercase()).count() > s.len() / 2 {
+        return s.to_uppercase()
     }
-
-    if lcase >= ucase {
-        s.to_lowercase()
-    } else {
-        s.to_uppercase()
-    }
+    s.to_lowercase()
 }
 
 fn main() {
-    println!("{}", solve("HELLO world"));
+        println!("{} expected: {}", fix_string_case("code"), "code");
+        println!("{} expected: {}", fix_string_case("CODe"), "CODE");
+        println!("{} expected: {}", fix_string_case("COde"), "code");
+        println!("{} expected: {}", fix_string_case("Code"), "code");
 }
 
 #[cfg(test)]
@@ -28,9 +18,9 @@ mod tests {
 
     #[test]
     fn basic() {
-        assert_eq!(solve("code"), "code");
-        assert_eq!(solve("CODe"), "CODE");
-        assert_eq!(solve("COde"), "code");
-        assert_eq!(solve("Code"), "code");
+        assert_eq!(fix_string_case("code"), "code");
+        assert_eq!(fix_string_case("CODe"), "CODE");
+        assert_eq!(fix_string_case("COde"), "code");
+        assert_eq!(fix_string_case("Code"), "code");
     }
 }
